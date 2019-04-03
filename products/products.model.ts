@@ -1,15 +1,20 @@
 import * as mongoose from 'mongoose'
 
 export interface Product extends mongoose.Document {
-  description: string    
+  description: string
+  price: Number    
 }
 
 const productSchema = new mongoose.Schema({  
-    comments: {
+    description: {
       type: String,
       required: true,
       maxlength: 100
-    }   
+    },
+    price: {
+      type: Number,
+      required: true    
+    }     
   })
   
   

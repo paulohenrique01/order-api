@@ -1,38 +1,32 @@
 import * as mongoose from 'mongoose'
+import { Client } from '../clients/clients.model';
 
 export interface Order extends mongoose.Document {
-  date: Date,
-  value: number
-  
+  number: Number
+  date: Date
+  client: mongoose.Types.ObjectId | Client,
+  value: Number  
 }
 
-const reviewSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
+  number: {
+    type: Number,
+    required: true
+  }, 
   date: {
     type: Date,
     required: true
+  }, 
+  client: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Client',
+    required: true
   },
-  rating: {
+  value: {
     type: Number,
-    required: true,
-    min: 1,
-    max: 5
-  },
-  comments: {
-    type: String,
-    required: true,
-    maxlength: 500
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  restaurant: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Restaurant',
-    required: true
+    required: true    
   }
+  
 })
 
-
-export const Review = mongoose.model<Review>('Review', reviewSchema)
+export const Order = mongoose.model<Order>('Order', orderSchema)
