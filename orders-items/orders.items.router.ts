@@ -27,6 +27,7 @@ class OrderItemRouter extends ModelRouter<OrderItem> {
     application.patch(`${this.basePath}/:id`, [this.validateId,this.update])
     application.del(`${this.basePath}/:id`, [this.validateId,this.delete])   
   }
+  
 }
 
 export const orderItemRouter = new OrderItemRouter()
