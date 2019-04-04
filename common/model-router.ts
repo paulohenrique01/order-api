@@ -7,7 +7,7 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
 
   basePath: string
 
-  pageSize: number = 2
+  pageSize: number = 10
 
   constructor(protected model: mongoose.Model<D>){
     super()
@@ -82,16 +82,16 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
   }
 
   replace = (req, resp, next)=>{
-   /* const options = {runValidators: true, overwrite: true}
+    const options = {runValidators: true, overwrite: true}
     this.model.update({_id: req.params.id}, req.body, options)
-        .exec().then( result =>{
-      if(result.n){
-        return this.prepareOne(this.model.findById(req.params.id))
-      } else{
-        throw new NotFoundError('Documento não encontrado')
-      }
+        .exec().then(   result=>{
+          if(result.n){
+            return this.prepareOne(this.model.findById(req.params.id)).then(this.render(resp, next)) //  return this.prepareOne(this.model.findById(req.params.id))
+          } else{
+            throw new NotFoundError('Documento não encontrado')
+          }     
     }).then(this.render(resp, next))
-      .catch(next)*/
+      .catch(next)
   }
 
   update = (req, resp, next)=>{
